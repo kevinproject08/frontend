@@ -1,0 +1,196 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Zap, FileAudio, Download, CheckCircle2, Sparkles, Moon, Sun, BarChart3, Music } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useTheme } from "next-themes";
+import notedraftLogo from "@/assets/notedraft-logo.png";
+import Footer from "@/components/Footer";
+
+const Landing = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="border-b border-border bg-background sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="h-10 w-10 inline-flex items-center justify-center rounded-md border border-border/50 bg-background hover:bg-accent transition-colors cursor-pointer">
+              <img src={notedraftLogo} alt="NoteDraft logo" className="h-6 w-6" />
+            </div>
+            <span className="text-xl font-bold">NoteDraft</span>
+          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/metrics">
+              <Button variant="outline" size="sm">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Metrics
+              </Button>
+            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="rounded-full"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+            <Link to="/dashboard">
+              <Button variant="gradient">Get Started</Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-background"></div>
+        <div className="container mx-auto px-4 py-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <div className="inline-block px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent-foreground text-sm font-medium mb-4">
+              <Sparkles className="inline h-4 w-4 mr-2" />
+              AI-Powered Transcription
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Transform Audio into MIDI in Seconds
+            </h1>
+            
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Professional audio-to-MIDI conversion powered by AI. Perfect for musicians, composers, and producers.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/dashboard">
+                <Button size="lg" variant="gradient" className="text-lg px-8">
+                  Upload Audio
+                </Button>
+              </Link>
+              <Link to="/learn-more">
+                <Button size="lg" variant="outline" className="text-lg px-8">
+                  Learn More
+                </Button>
+              </Link>
+            </div>
+
+            {/* Waveform Animation */}
+            <div className="mt-12 flex items-end justify-center gap-1 h-24">
+              {[...Array(40)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-2 bg-gradient-to-t from-primary to-accent rounded-full animate-pulse"
+                  style={{
+                    height: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 50}ms`,
+                    animationDuration: `${1000 + Math.random() * 1000}ms`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section id="how-it-works" className="py-24 bg-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-muted-foreground text-lg">Simple, fast, and accurate</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Card className="text-center hover:shadow-xl transition-shadow">
+              <CardHeader>
+                <div className="mx-auto w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <FileAudio className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle>1. Upload</CardTitle>
+                <CardDescription>
+                  Upload your audio or video file
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="text-center hover:shadow-xl transition-shadow">
+              <CardHeader>
+                <div className="mx-auto w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-4">
+                  <Zap className="h-8 w-8 text-accent" />
+                </div>
+                <CardTitle>2. Process</CardTitle>
+                <CardDescription>
+                  AI analyzes and transcribes to MIDI
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="text-center hover:shadow-xl transition-shadow">
+              <CardHeader>
+                <div className="mx-auto w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
+                  <Download className="h-8 w-8 text-success" />
+                </div>
+                <CardTitle>3. Download</CardTitle>
+                <CardDescription>
+                  Get your MIDI file instantly
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Powerful Features</h2>
+            <p className="text-muted-foreground text-lg">Everything you need for professional transcription</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              { icon: Zap, title: "Lightning Fast", description: "Process files in seconds with AI acceleration" },
+              { icon: CheckCircle2, title: "High Accuracy", description: "Advanced AI ensures precise note detection" },
+              { icon: FileAudio, title: "Multiple Formats", description: "Support for WAV, MP3, MP4, and more" },
+              { icon: Music, title: "Range Selection", description: "Choose specific sections to transcribe" },
+              { icon: Download, title: "Instant Download", description: "Get your MIDI files immediately" },
+              { icon: Sparkles, title: "Clean Output", description: "Professional-quality MIDI files" },
+            ].map((feature, i) => (
+              <Card key={i} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <feature.icon className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* For Musicians */}
+      <section className="py-24 bg-gradient-to-br from-primary/10 via-accent/10 to-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="text-4xl font-bold">For Musicians & Composers</h2>
+            <p className="text-lg text-muted-foreground">
+              Whether you're transcribing live recordings, converting audio sketches, or analyzing musical ideas,
+              NoteDraft gives you the tools to work faster and more efficiently.
+            </p>
+            <div className="pt-6">
+              <Link to="/dashboard">
+                <Button size="lg" variant="gradient">
+                  Start Converting Now
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Landing;
