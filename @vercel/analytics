@@ -1,3 +1,2 @@
-npm i @vercel/analytics
+npm install @vercel/analytics
 
-import { Analytics } from "@vercel/analytics/next" 
